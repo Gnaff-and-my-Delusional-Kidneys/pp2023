@@ -9,5 +9,5 @@ Students are expected to:
 Student Info
 =========================
 
-* Student Name: MY BEAUTY (is) Ngutyeẽn Quý Bảo
+* Student Name: Ngutyeẽn Quý Bảo
 * Student ID: BI12-047
