@@ -201,7 +201,7 @@ def cagpaastlbgpad():
                 gpa = math.floor(gpa*10)/10
                 student_list[i].set_gpa(gpa)
                 i += 1
-        student_list.sort(key = key)
+        student_list.sort(reverse = True, key = key)
         ls()
 #general functions
 def minilc():
