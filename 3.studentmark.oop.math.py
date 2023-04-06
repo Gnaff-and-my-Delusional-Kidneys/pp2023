@@ -219,7 +219,7 @@ def cagpaastlbgpad():
                     student_list[i].set_gpa(gpa)
                     i += 1
                 student_list.sort(reverse = True, key = key)
-            except AttributeError: print('Please input student and course ifnormation first')
+            except AttributeError: print('Please input student and course information first')
         ls()
 #general course listing function for selecting
 def minilc():
