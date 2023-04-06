@@ -263,7 +263,7 @@ def main():
         except ValueError: 
             print('Invalid input, please try again')
             continue
-#main function
+#call main function
 if __name__ == "__main__":
     main()
 #for confirmation: i absolutely do not have any kind of obsession for kidneys
