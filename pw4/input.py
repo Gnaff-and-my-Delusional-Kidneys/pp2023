@@ -1,50 +1,9 @@
-from datetime import datetime
+from domains import Student, Course
 import math
 import numpy as np
 #lists
 student_list = []
 course_list = []
-#classes
-class Student:
-    def __init__(self):
-        self.__id = ''
-        self.__name = ''
-        self.__dob = ''
-        self.__kidney = None
-        self.__gpa = 0
-    def set_student(self, id, name, number_of_remaining_kidneys):
-        self.__id = id
-        self.__name = name
-        self.__kidney = number_of_remaining_kidneys
-    def set_dob(self, dob):
-        dob = datetime.strptime(dob,"%d-%m-%Y").date()
-        self.__dob = dob.strftime("%d-%m-%Y")
-    def set_gpa(self, gpa): self.__gpa = gpa
-    def __str__(self): return f"""Student's id: {self.__id}
-Student's name: {self.__name}
-Student's dob: {self.__dob}
-Student's number of remaining kidneys: {self.__kidney}
-Student's average GPA: {self.__gpa}
-
-"""
-    def get_id(self): return f'{self.__id}'
-    def get_kidney(self): return self.__kidney
-    def get_gpa(self): return self.__gpa
-class Course:
-    def __init__(self):
-        self.__id = ''
-        self.__name = ''
-        self.__credit = 0
-        self.__marks = np.array([])
-    def set_course(self, id, name, credit):
-        self.__id = id
-        self.__name = name
-        self.__credit = credit
-    def set_marks(self, marks): self.__marks = marks
-    def __str__(self): return f"Course's id: {self.__id}\nCourse's name: {self.__name}\nCourse's credits: {self.__credit}\n\n"
-    def get_id(self): return f'{self.__id}'
-    def get_credit(self): return self.__credit
-    def get_marks(self): return self.__marks
 #input number of students in a class
 def inosiac():
     while True:
@@ -66,6 +25,7 @@ def isi():
     else:
         i = 0
         while i < len(student_list):
+            print(student_list)
             if student_list[i] == 0:
                 if not i == 0: print()
                 student_list[i] = Student()
@@ -162,63 +122,6 @@ def sacimfasitc():
                         course_list[n-1].set_marks(marks)
                     except AttributeError: print("Please input course information first")
             except ValueError: print('Invalid course number, please try again')
-#list courses
-def lc():
-    if len(course_list) > 0:
-        for course in course_list:
-            if course == 0: print('No course information')
-            else: print(course)
-    else: print('There is no course')
-#list students
-def ls():
-    if len(student_list) > 0:
-        for student in student_list:
-            if student == 0: print('No student information')
-            print(student)
-    else: print('There is no student')
-#show student marks for a given course
-def ssmfagc():
-    minilc()
-    if not len(course_list) > 0: print('There is no course')
-    else:
-        if not len(student_list) > 0: print('There is no student')
-        else:
-            try:
-                n = int(input('Select course number: '))
-                if n <= len(course_list) and n > 0:
-                    marks = course_list[n-1].get_marks()
-                    i = 0
-                    while i < len(student_list):
-                        print(student_list[i].get_id() + ": " + str(marks[i]))
-                        i += 1
-                else: print('Invalid input, please try again')
-            except ValueError: print('Invalid input, please try again')
-#calculate average GPA and sort student list by GPA descending
-def cagpaastlbgpad():
-    if not len(course_list) > 0: print('There is no course')
-    else:
-        if not len(student_list) > 0: print('There is no student')
-        else:
-            try:
-                i = 0
-                while i < len(student_list):
-                    gpa = 0
-                    total_credits = 0
-                    cn = 0
-                    while cn < len(course_list):
-                        marks = course_list[cn].get_marks()
-                        gpa = gpa + (marks[i] * course_list[cn].get_credit())
-                        total_credits = total_credits + course_list[cn].get_credit()
-                        cn += 1
-                    gpa /= total_credits
-                    gpa = gpa*10
-                    if gpa % 10 < 5: gpa = math.floor(gpa)/10
-                    else: gpa = math.ceil(gpa)/10
-                    student_list[i].set_gpa(gpa)
-                    i += 1
-                student_list.sort(reverse = True, key = key)
-            except AttributeError: print('Please input student and course information first')
-        ls()
 #general course listing function for selecting
 def minilc():
     if not len(course_list) > 0: print('', end ='')
@@ -228,40 +131,3 @@ def minilc():
             if course == 0: print(str(i)+'.'+'No course information')
             else: print(str(i)+'.'+str(course.get_id()))
             i += 1
-#general sorting key function
-def key(student):
-    return student.get_gpa()         
-#main fuction
-def main():
-    print('''What do you want to do:
-    0.exit
-    1.input number of students
-    2.input students informations
-    3.input number of courses
-    4.input courses informations
-    5.select a course, input marks for student in this course
-    6.list number of courses
-    7.list number of students
-    8.show student marks for a given course
-    9.Calculate average GPA and sort student list by GPA descending''')
-    while True:
-        try:
-            opt = int(input()) 
-            if opt == 0: break
-            elif opt == 1: inosiac()
-            elif opt == 2: isi()
-            elif opt == 3: inoc()
-            elif opt == 4: ici()
-            elif opt == 5: sacimfasitc()
-            elif opt == 6: lc()
-            elif opt == 7: ls()
-            elif opt == 8: ssmfagc()
-            elif opt == 9: cagpaastlbgpad()
-            else: print('Invalid input, please try again')
-        except ValueError: 
-            print('Invalid input, please try again')
-            continue
-#call main function
-if __name__ == "__main__":
-    main()
-#for confirmation: i absolutely do not have any kind of obsession for kidneys
