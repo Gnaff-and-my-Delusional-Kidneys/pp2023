@@ -100,6 +100,7 @@ def isi():
                 elif student_list[i].get_kidney() > 3: print('My delusional kidneys')#Oooh maa gaaaad 
                 elif student_list[i].get_kidney() < 0: print('Kidney debt???')#No waaayyaayyaaaaae
                 i += 1
+            else: i += 1
 #input number of courses
 def inoc():
     while True:

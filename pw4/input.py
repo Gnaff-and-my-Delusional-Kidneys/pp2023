@@ -60,6 +60,7 @@ def isi():
                 elif student_list[i].get_kidney() > 3: print('My delusional kidneys')#Oooh maa gaaaad 
                 elif student_list[i].get_kidney() < 0: print('Kidney debt???')#No waaayyaayyaaaaae
                 i += 1
+            else: i += 1
 #input number of courses
 def inoc():
     while True:
@@ -92,6 +93,7 @@ def ici():
                 course_list[i] = Course()
                 course_list[i].set_course(id, name, credit)
                 i += 1
+            else: i += 1
 #select a course, input marks for student in this course
 def sacimfasitc():
     minilc()
