@@ -1,6 +1,7 @@
 from domains import Student, Course
 import math
 import numpy as np
+import os
 #lists
 student_list = []
 course_list = []
@@ -9,12 +10,12 @@ def inosiac():
     while True:
         try:
             n = int(input('Input number of students in the class: '))
-            if n > 0:
+            if not n > 0: print('Invalid number of students, please try again')
+            else:
                 if n < len(student_list): 
                     n = [0]*n
                     student_list.clear()
                 else: n = [0]*(n-len(student_list))
-            else: print('Invalid number of students, please try again')
         except ValueError:
             print('Invalid number of students, please try again')
             continue
@@ -65,12 +66,12 @@ def inoc():
     while True:
         try:
             n = int(input('Input number of courses: '))
-            if n > 0:
+            if not n > 0: print('Invalid number of students, please try again')
+            else:
                 if n < len(course_list): 
                     n = [0]*n
                     course_list.clear()
                 else: n = [0]*(n-len(course_list))
-            else: print('Invalid number of students, please try again')
         except ValueError:
             print('Invalid number of students, please try again')
             continue    
@@ -132,3 +133,21 @@ def minilc():
             if course == 0: print(str(i)+'.'+'No course information')
             else: print(str(i)+'.'+str(course.get_id()))
             i += 1
+#update everything
+def update_info():
+    path = os.path.realpath(__file__)
+    dir = os.path.dirname(path)
+    dir += '\info'
+    os.chdir(dir)
+    f = open("students.txt", "w")
+    for student in student_list:
+        f.write(str(student))
+    f.close()
+    f = open("courses.txt", "w")
+    for course in course_list:
+        f.write(str(course))
+    f.close()
+    f = open("marks.txt", "w")
+    for course in course_list:
+        f.write(str(course.get_marks()))
+    f.close()

@@ -133,6 +133,7 @@ def ici():
                 course_list[i] = Course()
                 course_list[i].set_course(id, name, credit)
                 i += 1
+            else: i += 1
 #select a course, input marks for student in this course
 def sacimfasitc():
     minilc()
