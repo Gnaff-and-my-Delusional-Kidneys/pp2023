@@ -1,0 +1,4 @@
+Course's id: 
+Course's name: 
+Course's credits: 5
+

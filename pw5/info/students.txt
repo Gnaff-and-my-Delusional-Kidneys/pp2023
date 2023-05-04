@@ -1,0 +1,6 @@
+Student's id: 
+Student's name: 
+Student's dob: 14-04-2003
+Student's number of remaining kidneys: 3
+Student's average GPA: 0
+

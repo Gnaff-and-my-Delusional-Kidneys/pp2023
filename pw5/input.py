@@ -2,6 +2,7 @@ from domains import Student, Course
 import math
 import numpy as np
 import os
+import zlib
 #lists
 student_list = []
 course_list = []
@@ -34,7 +35,7 @@ def isi():
                     name = input("Student's name: ")
                     while True:
                         try: student_list[i].set_dob(input("Student's dob: "))
-                        except (ValueError, TypeError): 
+                        except (ValueError, TypeError):
                             print("Invalid student's date of birth, please try again")
                             continue
                         else: break
@@ -148,6 +149,19 @@ def update_info():
         f.write(str(course))
     f.close()
     f = open("marks.txt", "w")
-    for course in course_list:
-        f.write(str(course.get_marks()))
+    try: 
+        for course in course_list: f.write(str(course.get_marks()))
+    except: pass
     f.close()
+#compress files
+def compress_files():
+    files = ['students.txt', 'courses.txt', 'marks.txt']
+    archive = 'students.dat'
+    with open(archive, 'wb') as f_out:
+        compressor = zlib.compressobj()
+        for file in files:
+            with open(file, 'rb') as f_in:
+                for chunk in iter(lambda: f_in.read(1024), b''):
+                    compressed_chunk = compressor.compress(chunk)
+                    f_out.write(compressed_chunk)
+        f_out.write(compressor.flush())
