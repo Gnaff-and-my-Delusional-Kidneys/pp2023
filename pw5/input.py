@@ -153,8 +153,6 @@ def update_info():
         for course in course_list: f.write(str(course.get_marks()))
     except: pass
     f.close()
-#compress files
-def compress_files():
     files = ['students.txt', 'courses.txt', 'marks.txt']
     archive = 'students.dat'
     with open(archive, 'wb') as f_out:
@@ -165,3 +163,6 @@ def compress_files():
                     compressed_chunk = compressor.compress(chunk)
                     f_out.write(compressed_chunk)
         f_out.write(compressor.flush())
+    os.remove("students.txt")
+    os.remove("courses.txt")
+    os.remove("marks.txt")
