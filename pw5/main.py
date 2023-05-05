@@ -1,8 +1,9 @@
 from domains import Student, Course
-from input import inosiac, isi, inoc, ici, sacimfasitc, update_info
+from input import inosiac, isi, inoc, ici, sacimfasitc, update_info, load_info
 from output import lc, ls, ssmfagc, cagpaastlbgpad
 #main fuction
 def main():
+    load_info()
     print('''What do you want to do:
     0.exit
     1.input number of students

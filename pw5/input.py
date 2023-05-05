@@ -1,8 +1,8 @@
 from domains import Student, Course
 import math
 import numpy as np
-import os
 import zlib
+import os
 #lists
 student_list = []
 course_list = []
@@ -58,7 +58,8 @@ def isi():
         I like chôm chôm."
                 "The Kidneys In My Head"''') #A poem for the kidneyless. P.S: i don't actually like chôm chôm
                 elif student_list[i].get_kidney() == 3: print('My delusional kidney')#Wut da heeeeeeeeeeeeeeel
-                elif student_list[i].get_kidney() > 3: print('My delusional kidneys')#Oooh maa gaaaad 
+                elif student_list[i].get_kidney() > 3: print('My delusional kidneys')#Oooh maa gaaaad
+                elif student_list[i].get_kidney() == 0: print('KIDNEYLESS')
                 elif student_list[i].get_kidney() < 0: print('Kidney debt???')#No waaayyaayyaaaaae
                 i += 1
             else: i += 1
@@ -141,19 +142,14 @@ def update_info():
     dir += '\info'
     os.chdir(dir)
     f = open("students.txt", "w")
-    for student in student_list:
-        f.write(str(student))
+    f.write(len(student_list))
+    f.write(len(course_list))
+    for student in student_list: 
+        f.write(student.get_id()+','+student.get_name()+','+student.get_dob()+','+str(student.get_kidney())+','+str(student.get_gpa()))
+    for course in course_list: f.write(course.get_id()+','+course.get_name()+course.get_credit())
+    for course in course_list: f.write(str(course.get_marks()))
     f.close()
-    f = open("courses.txt", "w")
-    for course in course_list:
-        f.write(str(course))
-    f.close()
-    f = open("marks.txt", "w")
-    try: 
-        for course in course_list: f.write(str(course.get_marks()))
-    except: pass
-    f.close()
-    files = ['students.txt', 'courses.txt', 'marks.txt']
+    files = ['students.txt']
     archive = 'students.dat'
     with open(archive, 'wb') as f_out:
         compressor = zlib.compressobj()
@@ -163,6 +159,16 @@ def update_info():
                     compressed_chunk = compressor.compress(chunk)
                     f_out.write(compressed_chunk)
         f_out.write(compressor.flush())
-    os.remove("students.txt")
-    os.remove("courses.txt")
-    os.remove("marks.txt")
+    os.remove('students.txt')
+#load info
+def load_info():
+    path = os.path.realpath(__file__)
+    dir = os.path.dirname(path)
+    dir += '\info'
+    os.chdir(dir)
+    if os.path.isfile("students.dat"):
+        with open('students.dat', 'rb') as f:
+            compressed_data = f.read()
+        decompressed_data = zlib.decompress(compressed_data)
+        os.remove("students.dat")
+    decompressed_data = decompressed_data.split(",")

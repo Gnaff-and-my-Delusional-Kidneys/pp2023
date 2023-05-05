@@ -5,7 +5,7 @@ class Student:
         self.__name = ''
         self.__dob = ''
         self.__kidney = None
-        self.__gpa = 0
+        self.__gpa = 'Not calculated yet'
     def set_student(self, id, name, number_of_remaining_kidneys):
         self.__id = id
         self.__name = name
@@ -22,5 +22,7 @@ Student's average GPA: {self.__gpa}
 
 """
     def get_id(self): return f'{self.__id}'
+    def get_name(self): return f'{self.__name}'
+    def get_dob(self): return f'{self.__dob}'
     def get_kidney(self): return self.__kidney
     def get_gpa(self): return self.__gpa
