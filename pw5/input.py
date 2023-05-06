@@ -164,7 +164,13 @@ def update_info():
         if course == 0: f.write('0,')
         else: 
             f.write(course.get_id()+','+course.get_name()+','+str(course.get_credit())+',')
-            f.write(str(course.get_marks())+',')
+            marks = (course.get_marks())
+            if np.shape(marks) == (0,): f.write('x,')
+            else:
+                i = 0
+                while i < len(student_list): 
+                    f.write(str(marks[i])+',')
+                    i += 1
     f.close()
     files = ['students.txt']
     archive = 'students.dat'
@@ -210,5 +216,15 @@ def load_info():
             else:
                 course_list[i] = Course()
                 course_list[i].set_course(decompressed_data[j], decompressed_data[j+1], decompressed_data[j+2])
-                j += 4
+                j += 3
+                if decompressed_data[j] == 'x': j += 1 #line 168
+                else: 
+                    marks = np.zeros(len(student_list))
+                    k = 0
+                    while k < len(student_list):
+                        marks[k] = decompressed_data[j]
+                        j += 1
+                        k += 1
+                    j += len(student_list)
+                    course_list[i].set_marks(marks)
             i += 1

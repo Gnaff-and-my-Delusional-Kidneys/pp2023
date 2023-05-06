@@ -1,4 +1,3 @@
-from domains import Student, Course
 from input import inosiac, isi, inoc, ici, sacimfasitc, update_info, load_info
 from output import lc, ls, ssmfagc, cagpaastlbgpad
 #main fuction

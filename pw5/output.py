@@ -1,4 +1,3 @@
-from domains import Student, Course
 import math
 from input import student_list, course_list
 #list courses
