@@ -26,6 +26,7 @@ def isi():
     if len(student_list) == 0: print('There is no student!')
     else:
         i = 0
+        j = 0
         while i < len(student_list):
             if student_list[i] == 0:
                 if not i == 0: print()
@@ -59,10 +60,15 @@ def isi():
                 "The Kidneys In My Head"''') #A poem for the kidneyless. P.S: i don't actually like chôm chôm
                 elif student_list[i].get_kidney() == 3: print('My delusional kidney')#Wut da heeeeeeeeeeeeeeel
                 elif student_list[i].get_kidney() > 3: print('My delusional kidneys')#Oooh maa gaaaad
-                elif student_list[i].get_kidney() == 0: print('KIDNEYLESS')
+                elif student_list[i].get_kidney() == 0: print('THE KIDNEYLESS')
                 elif student_list[i].get_kidney() < 0: print('Kidney debt???')#No waaayyaayyaaaaae
                 i += 1
-            else: i += 1
+            else: 
+                i += 1
+                j += 1
+        if j == len(student_list): 
+            if j == 1: print('All student have their info inputted')
+            else: print('All student have their info inputted')
 #input number of courses
 def inoc():
     while True:
@@ -83,6 +89,7 @@ def ici():
     if len(course_list) == 0: print('There is no course!')
     else: 
         i = 0
+        j = 0
         while i < len(course_list):
             if course_list[i] == 0:
                 id = input("Course's id: ")
@@ -95,7 +102,12 @@ def ici():
                 course_list[i] = Course()
                 course_list[i].set_course(id, name, credit)
                 i += 1
-            else: i += 1
+            else: 
+                i += 1
+                j += 1
+        if j == len(course_list):
+            if j == 1: print('All course have their info inputted')
+            else: print('All courses have their info inputted')
 #select a course, input marks for student in this course
 def sacimfasitc():
     minilc()
@@ -142,12 +154,17 @@ def update_info():
     dir += '\info'
     os.chdir(dir)
     f = open("students.txt", "w")
-    f.write(len(student_list))
-    f.write(len(course_list))
+    f.write(',')
+    f.write(str(len(student_list))+',')
+    f.write(str(len(course_list))+',')
     for student in student_list: 
-        f.write(student.get_id()+','+student.get_name()+','+student.get_dob()+','+str(student.get_kidney())+','+str(student.get_gpa()))
-    for course in course_list: f.write(course.get_id()+','+course.get_name()+course.get_credit())
-    for course in course_list: f.write(str(course.get_marks()))
+        if student == 0: f.write('0,')
+        else: f.write(student.get_id()+','+student.get_name()+','+student.get_dob()+','+str(student.get_kidney())+','+str(student.get_gpa())+',')
+    for course in course_list:
+        if course == 0: f.write('0,')
+        else: 
+            f.write(course.get_id()+','+course.get_name()+','+str(course.get_credit())+',')
+            f.write(str(course.get_marks())+',')
     f.close()
     files = ['students.txt']
     archive = 'students.dat'
@@ -170,5 +187,28 @@ def load_info():
         with open('students.dat', 'rb') as f:
             compressed_data = f.read()
         decompressed_data = zlib.decompress(compressed_data)
-        os.remove("students.dat")
-    decompressed_data = decompressed_data.split(",")
+        decompressed_data = str(decompressed_data).split(',')
+        print(decompressed_data)
+        i = 0
+        j = 3
+        n = [0]*int(decompressed_data[1])
+        student_list.extend(n)
+        n = [0]*int(decompressed_data[2])
+        course_list.extend(n)
+        while i < int(decompressed_data[1]):
+            if decompressed_data[j] == '0': j += 1
+            else:
+                student_list[i] = Student()
+                student_list[i].set_student(decompressed_data[j], decompressed_data[j+1], int(decompressed_data[j+3]))
+                student_list[i].set_dob(decompressed_data[j+2])
+                student_list[i].set_gpa(decompressed_data[j+4])
+                j += 5
+            i += 1
+        i = 0     
+        while i < int(decompressed_data[2]):
+            if decompressed_data[j] == '0': j += 1
+            else:
+                course_list[i] = Course()
+                course_list[i].set_course(decompressed_data[j], decompressed_data[j+1], decompressed_data[j+2])
+                j += 4
+            i += 1

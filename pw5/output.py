@@ -13,7 +13,7 @@ def ls():
     if len(student_list) > 0:
         for student in student_list:
             if student == 0: print('No student information')
-            print(student)
+            else: print(student)
     else: print('There is no student')
 #show student marks for a given course
 def ssmfagc():
