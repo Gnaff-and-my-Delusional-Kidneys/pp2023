@@ -207,7 +207,7 @@ def load_info():
                 student_list[i] = Student()
                 student_list[i].set_student(decompressed_data[j], decompressed_data[j+1], int(decompressed_data[j+3]))
                 student_list[i].set_dob(decompressed_data[j+2])
-                student_list[i].set_gpa(decompressed_data[j+4])
+                if not decompressed_data[j+4] == 'Not calculated yet': student_list[i].set_gpa(decompressed_data[j+4])
                 j += 5
             i += 1
         i = 0     
