@@ -1,6 +1,5 @@
 from input import inosiac, isi, inoc, ici, sacimfasitc, update_info, load_info
 from output import lc, ls, ssmfagc, cagpaastlbgpad
-from input import student_list, course_list
 #main fuction
 def main():
     load_info()
